@@ -2,3 +2,6 @@ name = "mt_rainier_visibility"
 uuid = "c0d6884a-63e9-4cd7-9684-88f7f363676d"
 authors = ["brsan <brsandvik@gmail.com>"]
 version = "0.1.0"
+
+[deps]
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"

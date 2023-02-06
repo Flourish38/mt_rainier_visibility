@@ -1,0 +1,3 @@
+module mt_rainier_visibility
+
+end
