@@ -52,7 +52,10 @@ ply = Ply()
 push!(ply, PlyElement("vertex", 
     ArrayProperty("x", transformed_points[:, 1]),
     ArrayProperty("y", transformed_points[:, 2]),
-    ArrayProperty("z", transformed_points[:, 3])
+    ArrayProperty("z", transformed_points[:, 3]),
+    ArrayProperty("r", fill(UInt8(255), length(points))),
+    ArrayProperty("g", fill(UInt8(255), length(points))),
+    ArrayProperty("b", fill(UInt8(255), length(points)))
 ))
 
 save_ply(ply, "data/federal_way_true.ply")
