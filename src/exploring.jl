@@ -46,6 +46,8 @@ R = rotation_matrix(mean_point_norm, target)
 
 transformed_points = points_matrix * R
 
+transformed_points[:, 3] .-= minimum(transformed_points[:, 3])
+
 ply = Ply()
 push!(ply, PlyElement("vertex", 
     ArrayProperty("x", transformed_points[:, 1]),
