@@ -105,13 +105,21 @@ n = 0
     elevations = [federal_way_elevation[index] for index in indexes]
     diff = (elevations[1] + elevations[4]) - (elevations[2] + elevations[3])
     if diff > 0 || (diff == 0 && *(((size(federal_way_elevation) .÷ 2) .- i_tup)[1:2]...) >= 0)
-        push!(vertex_index, LI[indexes[[1, 2, 4]]])
-        push!(vertex_index, LI[indexes[[1, 4, 3]]])
+        push!(vertex_index, LI[indexes[[1, 2, 4]]] .- 1)
+        push!(vertex_index, LI[indexes[[1, 4, 3]]] .- 1)
     else
-        push!(vertex_index, LI[indexes[[1, 2, 3]]])
-        push!(vertex_index, LI[indexes[[2, 4, 3]]])
+        push!(vertex_index, LI[indexes[[1, 2, 3]]] .- 1)
+        push!(vertex_index, LI[indexes[[2, 4, 3]]] .- 1)
     end
 end
 push!(ply, PlyElement("face", vertex_index))
 
 save_ply(ply, "data/federal_way_true.ply")
+
+begin
+    a, i = findmax(mt_rainier_elevation)
+    ll = coords(mt_rainier_elevation, Tuple(i)[1:2])
+    ecef = ECEFfromLLA(wgs84)(LLA(ll..., a))
+    point = transpose(ecef)
+    transformed_point = vec(((point * R1) .- transpose(offsets_1)) * R2) .- offsets_2
+end 
